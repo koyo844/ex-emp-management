@@ -17,6 +17,11 @@ public class AdministratorService {
 	// insert() メソッドを呼ぶ処理
 	public void insert(Administrator administrator) {
 		administratorRepository.insert(administrator);
-		
+	}
+	
+	//ログイン処理を行う
+	public Administrator login(String mailAddress, String password) {
+		return administratorRepository.findByMailAddressAndPassword(mailAddress, password);
+		 
 	}
 }

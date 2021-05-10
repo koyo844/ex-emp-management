@@ -1,8 +1,13 @@
 package jp.co.sample.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -15,6 +20,9 @@ import jp.co.sample.service.AdministratorService;
 @RequestMapping("/")
 public class AdministratorController {
 
+	@Autowired
+	private HttpSession session;
+	
 	@Autowired
 	private AdministratorService administratorService;
 	
@@ -50,4 +58,22 @@ public class AdministratorController {
 	public String toLogin() {
 		return "administrator/login.html";
 	}
+	
+	@RequestMapping("/login")
+	public String login(LoginForm form
+			, Model model) {
+		if (administratorService.login(form.getMailAddress(), form.getPassword()) == null) {
+			//エラーメッセージの格納
+			model.addAttribute("model", "メールアドレスまたはパスワードが不正です。");
+			return "administrator/login.html";
+			
+		}else {
+			//セッションスコープに administratorName という名前をつけて管理者名を格納する
+			Administrator administrator = new Administrator();
+			model.addAttribute("administratorName", administrator.getName());
+			return "forward:/employee/showList";
+		}
+		
+	}
+	
 }
