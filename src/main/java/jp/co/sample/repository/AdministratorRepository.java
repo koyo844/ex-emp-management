@@ -30,12 +30,12 @@ public class AdministratorRepository {
 	
 	//管理者を登録する（管理者情報を挿入する）
 	public void insert(Administrator administrator) {
-		String sql = "INSERT INTO administrators(id, name, mail_address, password) VALUES (:id, :name, :mailAddress, :password)";
+		String sql = "INSERT INTO administrators(name, mail_address, password) VALUES (:name, :mailAddress, :password);";
 		//Valuesの内容に代入する内容
-		SqlParameterSource param = new MapSqlParameterSource().addValue("id", administrator.getId())
-								.addValue("name", administrator.getName())
-								.addValue("mail_address", administrator.getMailAddress())
+		SqlParameterSource param = new MapSqlParameterSource().addValue("name", administrator.getName())
+								.addValue("mailAddress", administrator.getMailAddress())
 								.addValue("password", administrator.getPassword());
+		template.update(sql, param);
 	}
 	//パスワードとアドレスから管理者情報を取得する
 	public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
