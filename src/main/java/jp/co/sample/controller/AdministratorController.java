@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorService;
 
 @Controller
@@ -36,5 +37,17 @@ public class AdministratorController {
 		BeanUtils.copyProperties(form, administrator);//コピー
 		administratorService.insert(administrator);
 		return "redirect;/";
+	}
+	
+	//LoginForm をインスタンス化しそのままreturnする処理
+	@ModelAttribute
+	LoginForm setUpLoginForm() {
+		return new LoginForm(); 
+	}
+	
+	//「administrator/login.html」にフォワードする処理
+	@RequestMapping("/")
+	public String toLogin() {
+		return "administrator/login.html";
 	}
 }
