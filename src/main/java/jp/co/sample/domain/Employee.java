@@ -12,14 +12,21 @@ public class Employee {
 	private String zipCode;
 	private String address;
 	private String telephone;
-	private String salary;
+	private Integer salary;
 	private String characteristics;//特性
-	private Integer dependents_count;//扶養人数
+	private Integer dependentsCount;//扶養人数
 	
 	public Employee() {}
-	
-	public Employee(Integer id, String name, String image, String gender, Date hireDate, String zipCode,
-			String address, String telephone, String salary, String characteristics, Integer dependents_count) {
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", image=" + image + ", gender=" + gender + ", hireDate="
+				+ hireDate + ", zipCode=" + zipCode + ", address=" + address + ", telephone=" + telephone + ", salary="
+				+ salary + ", characteristics=" + characteristics + ", dependentsCount=" + dependentsCount + "]";
+	}
+
+	public Employee(Integer id, String name, String image, String gender, Date hireDate, String zipCode, String address,
+			String telephone, Integer salary, String characteristics, Integer dependentsCount) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,9 +38,11 @@ public class Employee {
 		this.telephone = telephone;
 		this.salary = salary;
 		this.characteristics = characteristics;
-		this.dependents_count = dependents_count;
+		this.dependentsCount = dependentsCount;
 	}
 
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -98,11 +107,11 @@ public class Employee {
 		this.telephone = telephone;
 	}
 
-	public String getSalary() {
+	public Integer getSalary() {
 		return salary;
 	}
 
-	public void setSalary(String salary) {
+	public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
 
@@ -114,22 +123,14 @@ public class Employee {
 		this.characteristics = characteristics;
 	}
 
-	public Integer getDependents_count() {
-		return dependents_count;
+	public Integer getDependentsCount() {
+		return dependentsCount;
 	}
 
-	public void setDependents_count(Integer dependents_count) {
-		this.dependents_count = dependents_count;
+	public void setDependentsCount(Integer dependentsCount) {
+		this.dependentsCount = dependentsCount;
 	}
 
-	@Override
-	public String toString() {
-		return "employees [id=" + id + ", name=" + name + ", image=" + image + ", gender=" + gender + ", hireDate="
-				+ hireDate + ", zipCode=" + zipCode + ", address=" + address + ", telephone=" + telephone + ", salary="
-				+ salary + ", characteristics=" + characteristics + ", dependents_count=" + dependents_count + "]";
-	}
-	
-	
-	
+			
 }
 
