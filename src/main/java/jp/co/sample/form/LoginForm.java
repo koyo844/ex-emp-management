@@ -1,7 +1,12 @@
 package jp.co.sample.form;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class LoginForm {
+	@NotBlank(message="メールアドレスを入力してください")
 	private String mailAddress;
+	@Size(min=1, max=127, message="パスワードは4文字以上でお願いします")
 	private String password;
 	
 	

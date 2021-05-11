@@ -40,7 +40,16 @@ public class AdministratorController {
 	
 	//管理者情報を登録する。
 	@RequestMapping("/insert")
-	public String insert(InsertAdministratorForm form) {
+	public String insert(
+			@Validated InsertAdministratorForm form
+			,BindingResult result
+			) {
+		
+		//入力値チェックで引っ掛かると登録ページに戻る
+		if(result.hasErrors()) {
+			return "administrator/insert.html";//教科書p.143参照
+		}
+		
 		Administrator administrator = new Administrator(); //インスタンス化
 		BeanUtils.copyProperties(form, administrator);//コピー
 		administratorService.insert(administrator);

@@ -156,7 +156,9 @@
 							      扶養人数
 							    </th>
 							    <td>
-							    	<label class="error-messages">
+							    	<label th:if="${#fields.hasErrors('dependentsCount')}"
+											th:errors="*{dependentsCount}"
+											style="color:red">
 											扶養人数を入力してください
 									</label>
 									<label class="control-label" style="color: red" for="dependentsCount"></label>

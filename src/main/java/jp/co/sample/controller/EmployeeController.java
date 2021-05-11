@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 import jp.co.sample.domain.Employee;
 import jp.co.sample.form.UpdateEmployeeForm;
@@ -41,7 +43,16 @@ public class EmployeeController {
 	
 	//idを元に扶養人数を上書きする
 	@RequestMapping("/update")
-	public String update(UpdateEmployeeForm form) {
+	public String update(
+			@Validated UpdateEmployeeForm form
+			,BindingResult result
+			,Model model
+			) {
+		
+		//入力値チェックで引っ掛かると登録ページに戻る(showDetailごと持ってこないと情報なくなってしまう)
+				if(result.hasErrors()) {
+					return showDetail(form.getId(), model);//教科書p.143参照
+				}
 		
 		//送られてきたリクエストパラメータのidを使用して Employee ドメインを主キー検索
 		Employee employee = employeeService.showDetail(Integer.parseInt(form.getId())); 
