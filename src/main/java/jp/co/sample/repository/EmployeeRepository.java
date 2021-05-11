@@ -27,7 +27,7 @@ public class EmployeeRepository {
 		employee.setImage(rs.getString("image"));
 		employee.setGender(rs.getString("gender"));
 		employee.setHireDate(rs.getDate("hire_date"));
-		employee.setZipCode(rs.getString("mail_address"));
+		employee.setMailAddress(rs.getString("mail_address"));
 		employee.setZipCode(rs.getString("zip_code"));
 		employee.setAddress(rs.getString("address"));
 		employee.setTelephone(rs.getString("telephone"));
@@ -65,15 +65,15 @@ public class EmployeeRepository {
 	 * 全行更新されな いように Where 句の指定を考える。
 	 */
 	public void update(Employee employee) {
-		String sql = "UPDATE members\n"
-				+ " SET name = :name, image = :image, gender = :gender, hire_date = :hire_date, mail_address = :mailAddress, zip_code = :zip_code, address = :address, telephone = :telephone, salary = :salary, characteristics = :characteristics, dependents_count = :dependents_count WHERE id = :id";
+		String sql = "UPDATE employees\n"
+				+ " SET name = :name, image = :image, gender = :gender, hire_date = :hire_date, mail_address = :mail_address, zip_code = :zip_code, address = :address, telephone = :telephone, salary = :salary, characteristics = :characteristics, dependents_count = :dependents_count WHERE id = :id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", employee.getId())
 							.addValue("name", employee.getName())
 							.addValue("image", employee.getImage())
 							.addValue("gender", employee.getGender())
 							.addValue("hire_date", employee.getHireDate())
 							.addValue("mail_address", employee.getMailAddress())
-							.addValue("zip_Code", employee.getZipCode())
+							.addValue("zip_code", employee.getZipCode())
 							.addValue("address", employee.getAddress())
 							.addValue("telephone", employee.getTelephone())
 							.addValue("salary", employee.getSalary())
