@@ -68,7 +68,10 @@ public class AdministratorController {
 			return "administrator/login.html";
 			
 		}else {
-			//セッションスコープに administratorName という名前をつけて管理者名を格納する
+			/*
+			 * セッションスコープに administratorName という名前をつけて管理者名を格納する
+			 *とはいえここのnameのところに情報を入れる方法がわからない、、、
+			 */
 			Administrator administrator = new Administrator();
 			model.addAttribute("administratorName", administrator.getName());
 			return "forward:/employee/showList";
