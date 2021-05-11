@@ -9,6 +9,7 @@ public class Employee {
 	private String image;
 	private String gender;
 	private Date hireDate;//入社日
+	private String mailAddress;
 	private String zipCode;
 	private String address;
 	private String telephone;
@@ -18,31 +19,6 @@ public class Employee {
 	
 	public Employee() {}
 
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", image=" + image + ", gender=" + gender + ", hireDate="
-				+ hireDate + ", zipCode=" + zipCode + ", address=" + address + ", telephone=" + telephone + ", salary="
-				+ salary + ", characteristics=" + characteristics + ", dependentsCount=" + dependentsCount + "]";
-	}
-
-	public Employee(Integer id, String name, String image, String gender, Date hireDate, String zipCode, String address,
-			String telephone, Integer salary, String characteristics, Integer dependentsCount) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.image = image;
-		this.gender = gender;
-		this.hireDate = hireDate;
-		this.zipCode = zipCode;
-		this.address = address;
-		this.telephone = telephone;
-		this.salary = salary;
-		this.characteristics = characteristics;
-		this.dependentsCount = dependentsCount;
-	}
-
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -81,6 +57,14 @@ public class Employee {
 
 	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
+	}
+
+	public String getMailAddress() {
+		return mailAddress;
+	}
+
+	public void setMailAddress(String mailAddress) {
+		this.mailAddress = mailAddress;
 	}
 
 	public String getZipCode() {
@@ -131,6 +115,31 @@ public class Employee {
 		this.dependentsCount = dependentsCount;
 	}
 
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", image=" + image + ", gender=" + gender + ", hireDate="
+				+ hireDate + ", mailAddress=" + mailAddress + ", zipCode=" + zipCode + ", address=" + address
+				+ ", telephone=" + telephone + ", salary=" + salary + ", characteristics=" + characteristics
+				+ ", dependentsCount=" + dependentsCount + "]";
+	}
+
+	public Employee(Integer id, String name, String image, String gender, Date hireDate, String mailAddress,
+			String zipCode, String address, String telephone, Integer salary, String characteristics,
+			Integer dependentsCount) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.image = image;
+		this.gender = gender;
+		this.hireDate = hireDate;
+		this.mailAddress = mailAddress;
+		this.zipCode = zipCode;
+		this.address = address;
+		this.telephone = telephone;
+		this.salary = salary;
+		this.characteristics = characteristics;
+		this.dependentsCount = dependentsCount;
+	}
 			
 }
 

@@ -27,6 +27,7 @@ public class EmployeeRepository {
 		employee.setImage(rs.getString("image"));
 		employee.setGender(rs.getString("gender"));
 		employee.setHireDate(rs.getDate("hire_date"));
+		employee.setZipCode(rs.getString("mail_address"));
 		employee.setZipCode(rs.getString("zip_code"));
 		employee.setAddress(rs.getString("address"));
 		employee.setTelephone(rs.getString("telephone"));
@@ -38,7 +39,7 @@ public class EmployeeRepository {
 	};
 	//従業員一覧情報を入社日順で取得
 	public List<Employee> findAll(){
-		String sql = "SELECT id, name, image, gender, hire_date, zip_code, address, telephone, salary, characteristics, dependents_count FROM employees ORDER BY hire_date DESC";
+		String sql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics, dependents_count FROM employees ORDER BY hire_date DESC";
 		
 		List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 		
@@ -51,8 +52,8 @@ public class EmployeeRepository {
 	}
 	
 	//主キーから情報を取得
-	public Employee Load(Integer id) {
-		String sql = "SELECT id, name, image, gender, hire_date, zip_code, address, telephone, salary, characteristics, dependents_count FROM employees WHERE id = :id";
+	public Employee load(Integer id) {
+		String sql = "SELECT id, name, image, gender, hire_date, mail_address, zip_code, address, telephone, salary, characteristics, dependents_count FROM employees WHERE id = :id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
 		
@@ -65,12 +66,13 @@ public class EmployeeRepository {
 	 */
 	public void update(Employee employee) {
 		String sql = "UPDATE members\n"
-				+ " SET name = :name, image = :image, gender = :gender, hire_date = :hire_date, zip_code = :zip_code, address = :address, telephone = :telephone, salary = :salary, characteristics = :characteristics, dependents_count = :dependents_count WHERE id = :id";
+				+ " SET name = :name, image = :image, gender = :gender, hire_date = :hire_date, mail_address = :mailAddress, zip_code = :zip_code, address = :address, telephone = :telephone, salary = :salary, characteristics = :characteristics, dependents_count = :dependents_count WHERE id = :id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", employee.getId())
 							.addValue("name", employee.getName())
 							.addValue("image", employee.getImage())
 							.addValue("gender", employee.getGender())
 							.addValue("hire_date", employee.getHireDate())
+							.addValue("mail_address", employee.getMailAddress())
 							.addValue("zip_Code", employee.getZipCode())
 							.addValue("address", employee.getAddress())
 							.addValue("telephone", employee.getTelephone())
