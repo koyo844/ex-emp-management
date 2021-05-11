@@ -44,7 +44,7 @@ public class AdministratorController {
 		Administrator administrator = new Administrator(); //インスタンス化
 		BeanUtils.copyProperties(form, administrator);//コピー
 		administratorService.insert(administrator);
-		return "redirect;/";
+		return "redirect:/";
 	}
 	
 	//LoginForm をインスタンス化しそのままreturnする処理
@@ -78,8 +78,11 @@ public class AdministratorController {
 		}
 		
 	}
-	//@RequestMapping("/logout")
-	
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
 	
 	
 }
