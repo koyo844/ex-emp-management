@@ -40,11 +40,20 @@ public class AdministratorController {
 	
 	//管理者情報を登録する。
 	@RequestMapping("/insert")
-	public String insert(InsertAdministratorForm form) {
+	public String insert(
+			@Validated InsertAdministratorForm form
+			,BindingResult result
+			) {
+		
+		//入力値チェックで引っ掛かると登録ページに戻る
+		if(result.hasErrors()) {
+			return "administrator/insert.html";//教科書p.143参照
+		}
+		
 		Administrator administrator = new Administrator(); //インスタンス化
 		BeanUtils.copyProperties(form, administrator);//コピー
 		administratorService.insert(administrator);
-		return "redirect;/";
+		return "redirect:/";
 	}
 	
 	//LoginForm をインスタンス化しそのままreturnする処理
@@ -62,24 +71,25 @@ public class AdministratorController {
 	@RequestMapping("/login")
 	public String login(LoginForm form
 			, Model model) {
-		if (administratorService.login(form.getMailAddress(), form.getPassword()) == null) {
+		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+		if (administrator == null) {
 			//エラーメッセージの格納
 			model.addAttribute("model", "メールアドレスまたはパスワードが不正です。");
 			return "administrator/login.html";
 			
-		}else {
-			/*
+		}	/*
 			 * セッションスコープに administratorName という名前をつけて管理者名を格納する
-			 *とはいえここのnameのところに情報を入れる方法がわからない、、、
 			 */
-			Administrator administrator = new Administrator();
-			model.addAttribute("administratorName", administrator.getName());
+			session.setAttribute("administratorName", administrator.getName());
 			return "forward:/employee/showList";
-		}
+		
 		
 	}
-	//@RequestMapping("/logout")
-	
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
 	
 	
 }
