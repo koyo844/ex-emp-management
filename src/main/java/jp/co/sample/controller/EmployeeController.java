@@ -55,11 +55,19 @@ public class EmployeeController {
 				}
 		
 		//送られてきたリクエストパラメータのidを使用して Employee ドメインを主キー検索
-		Employee employee = employeeService.showDetail(Integer.parseInt(form.getId())); 
+		Employee employee = employeeService.showDetail(Integer.parseInt(form.getId())); //主キー検索で合致したキーの情報を全て取得
 		
-		employee.setDependentsCount(Integer.parseInt(form.getDependentsCount()));
-		employee.setId(Integer.parseInt(form.getId()));
-		//employeeService の update()メソッドを呼ぶ
+		employee.setDependentsCount(Integer.parseInt(form.getDependentsCount()));//扶養人数を上書き
+		employee.setName(form.getName());//名前を上書き
+		employee.setGender(form.getGender());
+		employee.setHireDate(form.getHireDate());
+		employee.setMailAddress(form.getMailAddress());
+		employee.setZipCode(form.getZipCode());
+		employee.setTelephone(form.getTelephone());
+		employee.setSalary(Integer.parseInt(form.getSalary()));
+		employee.setCharacteristics(form.getCharacteristics());
+		employee.setId(Integer.parseInt(form.getId()));//idを上書き（しなくてもいい）
+		//employeeService の update()メソッドを呼ぶ→上書きした情報を更新,emoployeeに格納する
 		employeeService.update(employee);
 		return "redirect:/employee/showList";
 	}

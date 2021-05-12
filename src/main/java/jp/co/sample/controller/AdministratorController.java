@@ -71,20 +71,18 @@ public class AdministratorController {
 	@RequestMapping("/login")
 	public String login(LoginForm form
 			, Model model) {
-		if (administratorService.login(form.getMailAddress(), form.getPassword()) == null) {
+		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+		if (administrator == null) {
 			//エラーメッセージの格納
 			model.addAttribute("model", "メールアドレスまたはパスワードが不正です。");
 			return "administrator/login.html";
 			
-		}else {
-			/*
+		}	/*
 			 * セッションスコープに administratorName という名前をつけて管理者名を格納する
-			 *とはいえここのnameのところに情報を入れる方法がわからない、、、
 			 */
-			Administrator administrator = new Administrator();
-			model.addAttribute("administratorName", administrator.getName());
+			session.setAttribute("administratorName", administrator.getName());
 			return "forward:/employee/showList";
-		}
+		
 		
 	}
 	@RequestMapping("/logout")
